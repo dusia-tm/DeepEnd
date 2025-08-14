@@ -1,20 +1,31 @@
 замены = {
     "функция": "def",
-    "вернуть": "return",
     "вывести": "print",
     "если": "if",
     "иначе": "else",
+    "иначе если": "elif",
+    "ввести": "input",
+    "случайное_число": "random.randint",
+    "стоп": "break"
 }
 
-def transpile(code):
+def транспилировать(код):
+    # Замена ключевых слов
     for ru, en in замены.items():
-        code = code.replace(ru, en)
-    return code
+        код = код.replace(ru, en)
+    
+    # Добавляем импорты, если нужны
+    если "random.randint" в код:
+        код = "import random\n" + код
+    
+    вернуть код
 
-# Пример использования:
-deep_end_code = """
-функция сложить(a, b):
-    вернуть a + b
-"""
-python_code = transpile(deep_end_code)
-print(python_code)
+если __name__ == "__main__":
+    пример = """
+    функция "угадать число":
+        загаданное = случайное_число(от=1, до=100)
+        вывести "Угадай число от 1 до 100!"
+    """
+    
+    python_код = транспилировать(пример)
+    print(python_код)
